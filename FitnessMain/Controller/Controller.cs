@@ -67,9 +67,9 @@ namespace FitnessMainLogic.Controller
             Save();
         }
 
-        //<summary>
-        //Сохранение данных пользователя
-        //</summary>
+        ///<summary>
+        ///Сохранение данных пользователя
+        ///</summary>
         public void Save()
         {
             var formatter = new BinaryFormatter();
