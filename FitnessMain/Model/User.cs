@@ -1,16 +1,20 @@
 ﻿using System;
+using FitnessMainLogic.Controller;
 
 namespace FitnessMainLogic.Model
 {
+    [Serializable]
     public class User
     {
 
 
         public string Name { get; }
-        public Gender Gender { get; }
-        public DateTime BirthDate { get; }
+        public Gender Gender { get; set; }
+        public DateTime BirthDate { get; set; }
         public double Weight { get; set; }
         public double Height { get; set; }
+        public int Age { get { return DateTime.Now.Year - BirthDate.Year; } }
+
         // <param   name = "name"> Имя. </param>
         // <param  gender = "gender"> Пол. </param>
         //  <param  birthDate = "birthday"> Дата рождения. </param>
@@ -21,7 +25,7 @@ namespace FitnessMainLogic.Model
             #region //проверка условий
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentNullException("Имя пользователя не может быть пустым", nameof(тame));
+                throw new ArgumentNullException("Имя пользователя не может быть пустым", nameof(name));
             }
             if (gender==null)
             {
@@ -48,5 +52,18 @@ namespace FitnessMainLogic.Model
             Height = height;
         }
 
+        public User(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException("Имя пользователя не может быть пустым", nameof(name));
+            }
+            Name = name;
+        }
+
+        public override string ToString()
+        {
+            return Name + " " + Age;
+        }
     }
 }
