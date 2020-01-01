@@ -13,6 +13,7 @@ namespace IterfaseFitness
             Console.WriteLine("Введите имя пользователя");
             var name = Console.ReadLine();
             var userController = new UserController(name);
+            var eatingController = new EatingController(userController.CurrentUser);
             if (userController.IsNewUser == true)
             {
                 Console.WriteLine("Введите пол");
@@ -27,7 +28,44 @@ namespace IterfaseFitness
                 userController.SetNewUserData(gender, birthday, weight, height);
             }
             Console.WriteLine(userController.CurrentUser);
+
+            Console.WriteLine("Что дальше?");
+            Console.WriteLine("Е-ввести прием пищи");
+            var key = Console.ReadKey();
+            Console.WriteLine();
+            if(key.Key==ConsoleKey.E)
+            {
+               var foods= EnterEating();
+               eatingController.Add(foods.Food, foods.Weight);
+                foreach (var item in eatingController.Eating.Foods)
+                {
+                    Console.WriteLine(item.Key+"-"+item.Value);
+                }
+
+            }
             Console.ReadLine();
+        }
+
+        private static (Food Food, double Weight) EnterEating()
+        {
+            Console.WriteLine("Введите имя продукта");
+            var food = Console.ReadLine();
+         //   Console.WriteLine("Введите калорийность продукта");
+            var calories = ParseDouble("калорийность");
+
+         //   Console.WriteLine("протеины");
+            var prot= ParseDouble("протеины");
+
+         //   Console.WriteLine("жиры");
+            var fats = ParseDouble("жиры");
+
+          //  Console.WriteLine("углеводы");
+            var charb = ParseDouble("углеводы");
+
+            var weight = ParseDouble("вес");
+
+            var product = new Food(food, calories, prot, fats, charb);
+            return (product, weight);
         }
 
         private static double ParseDouble(string name)

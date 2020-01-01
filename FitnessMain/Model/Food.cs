@@ -4,6 +4,7 @@ using System.Text;
 
 namespace FitnessMainLogic.Model
 {
+    [Serializable]
     public class Food
     {
         public string Name { get; }
@@ -30,15 +31,16 @@ namespace FitnessMainLogic.Model
         //private double FatsOneGramm { get { return Fats / 100.0; } }
         //private double CarbohydratesOneGramm { get { return Carbohydrates / 100.0; } }
 
-        public Food(string name):this(name,0,0,0)
+        public Food(string name):this(name,0,0,0,0)
         {
         }
 
-        public Food(string name, double protein, double fats, double carbohydrates)
+        public Food(string name,double calories, double protein, double fats, double carbohydrates)
         {
             //Проверка
 
             Name = name;
+            Calories = calories;
             Proteins = protein/100.0;
             Fats = fats / 100.0;
             Carbohydrates = carbohydrates / 100.0;
